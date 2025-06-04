@@ -1,0 +1,91 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #442146;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form input, form select {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    form button {
+      padding: 10px 20px;
+      background-color: #800080;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    form button:hover{
+      box-shadow: 7px 7px 7px rgb(54, 54, 54);
+      border-radius: 50px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .summary {
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+
+    .add_purchase{
+      display: flex;
+      justify-content: center;
+    }
+
+.back-btn {
+  background-color: #800080;
+  margin: 10px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  display: inline-block;
+  justify-content: center;
+}
+
+.back-btn:hover {
+  background-color: white;
+  color: #800080;
+  border: 2px solid #800080;
+  transform: scale(1.05); /* subtle grow effect */
+}

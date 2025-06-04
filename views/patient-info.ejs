@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/patient-info.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Details</h1>
+        <div class="patient-details">
+            <table>
+                <tr><th>Full Name:</th><td><%= patient.fullname %></td></tr>
+                <tr><th>Phone:</th><td><%= patient.phone_number %></td></tr>
+                <tr><th>Note:</th><td><%= patient.note || 'None' %></td></tr>
+                <tr><th>Address:</th><td><%= patient.address %></td></tr>
+                <tr><th>Date of visit:</th><td><%= patient.date %></td></tr>
+                <tr><th>Initial Amount:</th><td><%= patient.amount || '0' %></td></tr>
+            </table>
+        </div>
+        
+        <!-- Dental Chart Image -->
+        <div class="dental-chart">
+            <h2>Dental Chart</h2>
+            <img src="/picture/teeth_with_number.jpg" alt="Human Dentition Chart" class="teeth-chart">
+        </div>
+        
+        <h2>Payment History</h2>
+<div class="payment-history">
+    <% if (typeof payments !== 'undefined' && payments.length > 0) { 
+        let totalAmountSum = 0;
+        let paidSum = 0;
+        let unpaidSum = 0;
+    %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Treatment</th>
+                    <th>Total Amount</th>
+                    <th>Paid</th>
+                    <th>Unpaid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% payments.forEach(payment => {
+                    totalAmountSum += parseFloat(payment.total_amount || 0);
+                    paidSum += parseFloat(payment.paid || 0);
+                    unpaidSum += parseFloat(payment.unpaid || 0);
+                %>
+                    <tr>
+                        <td><%= payment.payment_date %></td>
+                        <td><%= payment.treatment || 'Not specified' %></td>
+                        <td>$<%= payment.total_amount %></td>
+                        <td>$<%= payment.paid %></td>
+                        <td>$<%= payment.unpaid %></td>
+                    </tr>
+                <% }); %>
+                <!-- Totals row -->
+                <tr style="font-weight: bold; background-color: #f2f2f2;">
+                    <td colspan="2" style="text-align:right;">Total:</td>
+                    <td>$<%= totalAmountSum.toFixed(2) %></td>
+                    <td>$<%= paidSum.toFixed(2) %></td>
+                    <td>$<%= unpaidSum.toFixed(2) %></td>
+                </tr>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No payment history available.</p>
+    <% } %>
+</div>
+
+        
+        <h2>Add New Payment</h2>
+        <div class="payment-form">
+            <form action="/admin/view-patient/<%= patient.id %>" method="POST">
+                <input type="hidden" name="patientId" value="<%= patient.id %>">
+                
+                <div class="form-group">
+                    <label for="treatment">Treatment:</label>
+                    <input type="text" id="treatment" name="treatment" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="total_amount">Total Amount:</label>
+                    <input type="number" id="total_amount" name="total_amount" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paid">Paid Amount:</label>
+                    <input type="number" id="paid" name="paid" step="0.01" required>
+                </div>
+                
+                <button type="submit" class="btn btn-save">Save Payment</button>
+            </form>
+        </div>
+        
+        <a href="/admin/view" class="btn btn-back">Back to Patient List</a>
+    </div>
+</body>
+</html>

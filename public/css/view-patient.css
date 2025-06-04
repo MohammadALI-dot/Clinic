@@ -1,0 +1,171 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Content Section */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: rgb(128, 72, 128);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 2px solid rgb(128, 72, 128);
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: rgb(128, 72, 128);
+    color: white;
+}
+
+/* Card */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+}
+
+/* Patient Information */
+.product-info p {
+    font-size: 16px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.product-info p strong {
+    color: #222;
+}
+
+/* Price Styling (Note) */
+.price {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* View & Delete Button Shared Style */
+.action-buttons .btn,
+.action-buttons .add-to-cart-btn {
+    width: 130px;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* View Button */
+.btn {
+    background-color: rgb(128, 72, 128);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: purple;
+}
+
+/* Delete Button */
+.add-to-cart-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.add-to-cart-btn:active {
+    background-color: #a71d2a;
+    transform: scale(0.95);
+}
+
+/* No Products Message */
+h1 {
+    color: #d9534f;
+    margin-top: 50px;
+    font-size: 24px;
+    text-align: center;
+}
+
+
+/* CSS for search */
+.search-container {
+  display: flex;
+  max-width: 500px; /* Adjust width as needed */
+  margin: 20px auto; /* Centers the container */
+}
+
+.search-input {
+  flex: 1; /* Takes remaining space */
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 4px 0 0 4px; /* Rounded left side */
+  outline: none; /* Removes default focus outline */
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: rgb(128, 72, 128);
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(128,72,128);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: purple
+}

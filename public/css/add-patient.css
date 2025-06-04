@@ -1,0 +1,98 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Form Container */
+.form-container {
+    background-color: white;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.form-container h2 {
+    margin-bottom: 25px;
+    color: rgb(128, 72, 128);
+    text-align: center;
+}
+
+/* Form Labels */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Inputs and Textareas */
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgb(128, 72, 128);
+    outline: none;
+}
+
+/* Submit & Add Amount Buttons */
+.submit-btn,
+.amount-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: rgb(128, 72, 128);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover,
+.amount-btn:hover {
+    background-color: purple;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    border: 2px solid rgb(128, 72, 128);
+    border-radius: 6px;
+    text-decoration: none;
+    color: rgb(128, 72, 128);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: rgb(128, 72, 128);
+    color: white;
+}

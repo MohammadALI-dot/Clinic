@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/view-patient.css">
+</head>
+<body>
+    <div class="container">
+        <section class="content">
+
+           <form action="/admin/search" method="get">
+                <div class="search-container">
+                    <input type="text" class="search-input" name="search" placeholder="Search...">
+                    <button class="search-button">Search</button>
+                </div>
+            </form>
+            
+            </form>
+
+           
+                <% for (let patient of patients) { %>
+                    <div class="card">
+                        <div class="product-info">
+                            <p><strong>Id:</strong> <%= patient.id %></p>
+                            <p><strong>Name:</strong> <%= patient.fullname %></p>
+                            <p><strong>Phone Number:</strong> <%= patient.phone_number %></p>
+                            <p><strong>Note:</strong> <span class="price"><%= patient.note %></span></p>
+                            <p><strong>Address:</strong> <%= patient.address %></p>
+                            <div class="action-buttons">
+                                <a href="/admin/view-patient/<%= patient.id %>" class="btn">View Patient</a>
+                                <form action="/admin/delete-patient/<%= patient.id %>" method="post">
+                                    <button type="submit" class="add-to-cart-btn">Delete Patient</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                <% } %>
+           
+
+            
+            <a href="/admin/add-view-patient" class="back-btn">← Back</a>
+
+        </section>
+    </div>
+</body>
+</html>

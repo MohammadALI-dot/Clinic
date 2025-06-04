@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/patient-info.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .patient-details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .patient-details table {
+            width: 100%;
+        }
+        .patient-details th {
+            text-align: left;
+            padding: 8px;
+            width: 30%;
+        }
+        .patient-details td {
+            padding: 8px;
+        }
+        .payment-history {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .payment-history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .payment-history th, .payment-history td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .payment-info {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .amount-controls {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e8f4ff;
+            border-radius: 4px;
+        }
+        .amount-options {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+        }
+        .amount-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: normal;
+        }
+        .payment-status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .unpaid {
+            color: #e74c3c;
+        }
+        .paid {
+            color: #2ecc71;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        .btn-save {
+            background-color: rgb(128, 72, 128);
+        }
+        .btn-back {
+            background-color: #95a5a6;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        form input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .balance-display {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Details</h1>
+        <div class="patient-details">
+            <table>
+                <tr><th>Full Name:</th><td><%= patient.fullname %></td></tr>
+                <tr><th>Phone:</th><td><%= patient.phone_number %></td></tr>
+                <tr><th>Age:</th><td><%= patient.age %></td></tr>
+                <tr><th>Address:</th><td><%= patient.address %></td></tr>
+                <tr><th>Date of birth:</th><td><%= patient.date %></td></tr>
+                <tr><th>Week:</th><td><%= patient.week %></td></tr>
+                <tr><th>File:</th><td><%= patient.File %></td></tr>
+                <tr><th>Note:</th><td><%= patient.note %></td></tr>
+                <tr><th>Initial Amount:</th><td><%= patient.amount %></td></tr>
+            </table>
+        </div>
+        
+        <% if (typeof payments !== 'undefined' && payments.length > 0) { %>
+        <h2>Payment History</h2>
+        <div class="payment-history">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date of Visit</th>
+                        <th>Total Amount</th>
+                        <th>Paid</th>
+                        <th>Unpaid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% payments.forEach(payment => { %>
+                    <tr>
+                        <td><%= payment.date_of_visit %></td>
+                        <td>$<%= payment.total_amount %></td>
+                        <td>$<%= payment.paid %></td>
+                        <td>$<%= payment.unpaid %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            
+            <div class="payment-status">
+                <% 
+                let totalAmount = 0;
+                let totalPaid = 0;
+                payments.forEach(payment => {
+                    totalAmount += parseFloat(payment.total_amount);
+                    totalPaid += parseFloat(payment.paid);
+                });
+                const unpaid = totalAmount - totalPaid;
+                %>
+                
+                <p>Total Services: $<%= totalAmount.toFixed(2) %></p>
+                <p>Total Paid: $<%= totalPaid.toFixed(2) %></p>
+                
+                <% if (unpaid > 0) { %>
+                <p>Remaining Balance: <span class="unpaid">$<%= unpaid.toFixed(2) %></span></p>
+                <% } else { %>
+                <p class="paid">Paid in Full</p>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+        <h2>Add Payment Information</h2>
+        <div class="payment-info">
+            <form action="/admin/view-patient/<%= patient.id %>" method="POST" id="paymentForm">
+                <input type="hidden" name="productId" value="<%= patient.id %>">
+                <input type="hidden" id="initial_amount" value="<%= patient.amount %>">
+                
+                <div class="amount-controls">
+                    <label><strong>Initial Amount: $<%= patient.amount %></strong></label>
+                    
+                    <div class="amount-options">
+                        <label>
+                            <input type="radio" name="amount_option" value="use_initial" checked> 
+                            Use Initial Amount Only
+                        </label>
+                        <label>
+                            <input type="radio" name="amount_option" value="add_to_initial"> 
+                            Add to Initial Amount
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="additional_amount_container" style="display: none;">
+                    <label for="additional_amount">Additional Amount to Add:</label>
+                    <input type="number" id="additional_amount" name="additional_amount" step="0.01" value="0">
+                </div>
+                
+                <label for="paid">Paid Amount:</label>
+                <input type="number" id="paid" name="paid" step="0.01" required>
+                
+                <div class="balance-display" id="balanceDisplay"></div>
+                
+                <button type="submit" class="btn btn-save">Save Payment</button>
+            </form>
+        </div>
+        
+        <a href="/admin/view" class="btn btn-back">Back to List</a>
+    </div>
+
+    <script>
+        // Calculate and display balance as user enters values
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialAmountInput = document.getElementById('initial_amount');
+            const totalAmountInput = document.getElementById('total_amount');
+            const paidInput = document.getElementById('paid');
+            const balanceDisplay = document.getElementById('balanceDisplay');
+            const radioUseInitial = document.querySelector('input[value="use_initial"]');
+            const radioCustom = document.querySelector('input[value="custom"]');
+            const customAmountContainer = document.getElementById('custom_amount_container');
+            
+            // Add event listeners for radio buttons
+            radioUseInitial.addEventListener('change', function() {
+                if (this.checked) {
+                    customAmountContainer.style.display = 'none';
+                    updateBalance();
+                }
+            });
+            
+            radioCustom.addEventListener('change', function() {
+                if (this.checked) {
+                    customAmountContainer.style.display = 'block';
+                    updateBalance();
+                }
+            });
+            
+            function updateBalance() {
+                let totalAmount;
+                if (radioUseInitial.checked) {
+                    totalAmount = parseFloat(initialAmountInput.value) || 0;
+                } else {
+                    totalAmount = parseFloat(totalAmountInput.value) || 0;
+                }
+                
+                const paid = parseFloat(paidInput.value) || 0;
+                const unpaid = totalAmount - paid;
+                
+                if (unpaid > 0) {
+                    balanceDisplay.innerHTML = `<p>Total Amount: ${totalAmount.toFixed(2)}, Unpaid Amount: ${unpaid.toFixed(2)}</p>`;
+                    balanceDisplay.style.color = '#e74c3c';
+                } else if (unpaid === 0) {
+                    balanceDisplay.innerHTML = `<p>Total Amount: ${totalAmount.toFixed(2)}, Paid in Full</p>`;
+                    balanceDisplay.style.color = '#2ecc71';
+                } else {
+                    balanceDisplay.innerHTML = `<p>Total Amount: ${totalAmount.toFixed(2)}, Overpaid by ${Math.abs(unpaid).toFixed(2)}</p>`;
+                    balanceDisplay.style.color = '#f39c12';
+                }
+            }
+            
+            // Add event listeners
+            if (totalAmountInput) {
+                totalAmountInput.addEventListener('input', updateBalance);
+            }
+            paidInput.addEventListener('input', updateBalance);
+            
+            // Initialize balance display
+            updateBalance();
+        });
+    </script>
+</body>
+</html>

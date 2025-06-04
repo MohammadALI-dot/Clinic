@@ -1,0 +1,67 @@
+esm marid (when i put her name give the all data of  this patient):
+THE DATA FOR EACH PATIENT:
+picture for each teeth and can color it.
+date
+treatment
+amount
+paid
+rest
+(add-delete)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= pageTitle %> </title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/view-patient.css">
+</head>
+<body>
+
+  
+    <div class="form-container">
+        <h2>View Patient</h2>
+        <form id="searchForm">
+          <input type="text" name="search" placeholder="Search for products..." value="">
+          <button type="submit">Search</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+        <!-- Content -->
+        <div class="container">
+          <section class="content">
+            <!-- Product Card 1 -->
+             <% if(product) { %>
+              
+            <div class="card">
+              <img src="<%= product.File%>" alt="Product 2">
+              <div class="product-info">
+                <h3><%= product.fullname%></h3>
+                <p><%= product.phone_number%></p>
+                <h3><%= product.date %></h3>
+                <h3><%= product.age %></h3>
+                <h3><%= product.address %></h3>
+                <h3><%= product.week %></h3>
+                
+               
+                <!-- <a href="/view-product/<%= product.id %>" class="add-to-cart-btn">View Product</a> -->
+              </div>
+            </div>
+           
+            <% } else {%>
+              <h1>No products found!</h1>
+              <% } %>
+          </section>
+          </div>
+            
+         
+    
+  
+    <%- include('includes/footer.ejs') %>
+    
+</body>
+</html>

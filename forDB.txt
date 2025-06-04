@@ -1,0 +1,2 @@
+TRUNCATE TABLE about_patients.add_patient;
+to return from 0

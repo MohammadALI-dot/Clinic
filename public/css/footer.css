@@ -1,0 +1,139 @@
+/* Footer Styles */
+footer {
+    background: linear-gradient(to right, rgba(185, 108, 185, 0.05), rgba(170, 90, 170, 0.1), rgba(185, 108, 185, 0.05));
+    position: relative;
+    padding: 30px 0;
+    margin-top: auto;
+    border-top: 1px solid rgba(185, 108, 185, 0.2);
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b96cb9' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 20.5C0 9.2 9.2 0 20.5 0S41 9.2 41 20.5 31.8 41 20.5 41 0 31.8 0 20.5zm2 0c0 10.2 8.3 18.5 18.5 18.5S39 30.7 39 20.5 30.7 2 20.5 2 2 10.3 2 20.5zm7.5-1.5c0 6.1 4.9 11 11 11s11-4.9 11-11-4.9-11-11-11-11 4.9-11 11zm2 0c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-container::before {
+    content: "♦";
+    font-size: 24px;
+    color: rgba(185, 108, 185, 0.6);
+    margin-bottom: 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container p {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-container p::before,
+.footer-container p::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(to right, transparent, rgba(185, 108, 185, 0.4), transparent);
+    top: 50%;
+}
+
+.footer-container p::before {
+    right: calc(100% + 15px);
+}
+
+.footer-container p::after {
+    left: calc(100% + 15px);
+}
+
+/* Pulse animation for diamond symbol */
+@keyframes diamondPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+
+.footer-container::before {
+    animation: diamondPulse 3s infinite ease-in-out;
+}
+
+/* Hover effect for the footer */
+.footer-container:hover::before {
+    color: rgba(185, 108, 185, 0.9);
+}
+
+/* Add clinic logo/info section */
+.footer-clinic-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.footer-clinic-logo {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, rgba(185, 108, 185, 0.8), rgba(150, 85, 150, 0.8));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-clinic-name {
+    font-weight: 600;
+    color: #444;
+    font-size: 15px;
+}
+
+/* Add this to your HTML structure right before the copyright paragraph */
+.footer-container::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, rgba(185, 108, 185, 0.3), transparent);
+    margin: 12px auto;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .footer-container p::before,
+    .footer-container p::after {
+        width: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container p::before,
+    .footer-container p::after {
+        display: none;
+    }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Patient Information</h2>
+        <input type="text" id="search" placeholder="Search for patients..." onkeyup="filterPatients()">
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Date</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Week</th>
+                    <th>File</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody id="patientTable">
+                <tr>
+                    <td>John Doe</td>
+                    <td>+123456789</td>
+                    <td>2025-02-05</td>
+                    <td>30</td>
+                    <td>123 Main St</td>
+                    <td>Week 4</td>
+                    <td>file1.pdf</td>
+                    <td>Checkup required</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>+987654321</td>
+                    <td>2025-02-01</td>
+                    <td>28</td>
+                    <td>456 Elm St</td>
+                    <td>Week 3</td>
+                    <td>file2.pdf</td>
+                    <td>Follow-up in two weeks</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterPatients() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let rows = document.querySelectorAll("#patientTable tr");
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
+
