@@ -70,6 +70,6 @@ res.status(404).render("404",
 
 
 
-app.listen(3001,"localhost",()=>{
-    console.log("Running in port 3001");
+app.listen(3000,"localhost",()=>{
+    console.log("Running in port 3000");
 });
