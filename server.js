@@ -10,11 +10,11 @@ const session=require("express-session");
 const MySQLStore=require("express-mysql-session")(session);
 
 const options = {
-    host : 'localhost',
-    port : 3306,
-    user : 'root',
-    password : "1234",
-    database : "about_patients"
+    host: process.env.DB_HOST,
+    port: 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 };
 
 const sessionStore = new MySQLStore(options);
@@ -70,6 +70,7 @@ res.status(404).render("404",
 
 
 
-app.listen(3000,"localhost",()=>{
-    console.log("Running in port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Running on port ${PORT}`);
 });
