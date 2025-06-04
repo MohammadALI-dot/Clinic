@@ -9,13 +9,13 @@ const authRoute = require("./routes/auth");
 const session=require("express-session");
 const MySQLStore=require("express-mysql-session")(session);
 
-const options = {
-    host: process.env.DB_HOST,
-    port: 3306,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-};
+// In your Express app (likely app.js or server.js)
+const db = mysql.createConnection({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '1234',
+  database: process.env.DB_NAME || 'about_patients'
+});
 
 const sessionStore = new MySQLStore(options);
 
