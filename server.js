@@ -9,13 +9,14 @@ const authRoute = require("./routes/auth");
 const session=require("express-session");
 const MySQLStore=require("express-mysql-session")(session);
 
-// In your Express app (likely app.js or server.js)
-const db = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '1234',
-  database: process.env.DB_NAME || 'about_patients'
-});
+const options = {
+    host : 'localhost',
+    port : 3306,
+    user : 'root',
+    password : "1234",
+    database : "about_patients"
+};
+
 
 const sessionStore = new MySQLStore(options);
 
@@ -70,7 +71,6 @@ res.status(404).render("404",
 
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Running on port ${PORT}`);
+app.listen(3000,"localhost",()=>{
+    console.log("Running in port 3000");
 });
